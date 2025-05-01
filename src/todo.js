@@ -9,5 +9,6 @@ class ToDo {
     check() {
         this.isDone = !this.isDone;
     }
-
 }
+
+export {ToDo};

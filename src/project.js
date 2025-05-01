@@ -10,3 +10,5 @@ function createProject(name) {
     
     return {name, toDoList, addToDo};
 }
+
+export {createProject};
