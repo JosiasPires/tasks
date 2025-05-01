@@ -3,8 +3,8 @@ function createProjectManager() {
     const addProject = (project) => {
         projectList.push(project);
         project.remove = () => {
-            const index = toDoList.findIndex((item) => project == item);
-            toDoList.splice(index, 1);
+            const index = projectList.findIndex((item) => project == item);
+            projectList.splice(index, 1);
         }
     };
     return {projectList, addProject};
