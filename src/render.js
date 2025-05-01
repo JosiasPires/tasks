@@ -8,8 +8,10 @@ function renderProject(project) {
     title.textContent = project.name;
     removeBtn.addEventListener('click', (e) => {
         project.remove();
+        container.remove();
     })
     
     container.appendChild(title);
     container.appendChild(removeBtn);
+    sidebar.appendChild(container)
 }
