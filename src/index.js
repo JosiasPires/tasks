@@ -1,4 +1,5 @@
-import "./style.css";
-import { ToDo } from "./todo";
-import { createProject } from "./project";
-import { createProjectManager } from "./projectsManager";
+// import "./style.css";
+import { ToDo } from "./todo.js";
+import { createProject } from "./project.js";
+import { createProjectManager } from "./projectsManager.js";
+import { renderProject } from "./render.js";

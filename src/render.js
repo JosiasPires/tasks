@@ -15,3 +15,5 @@ function renderProject(project) {
     container.appendChild(removeBtn);
     sidebar.appendChild(container)
 }
+
+export {renderProject}
