@@ -9,6 +9,11 @@ class ToDo {
     check() {
         this.isDone = !this.isDone;
     }
+    update(changes) {
+        for (let key in changes) {
+            this[key] = changes[key];
+        }
+    }
 }
 
 export {ToDo};
