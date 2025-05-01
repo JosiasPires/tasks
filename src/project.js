@@ -6,8 +6,7 @@ function createProject(name) {
             const index = toDoList.findIndex((item) => todo == item);
             toDoList.splice(index, 1);
         }
-    } 
-    
+    };
     return {name, toDoList, addToDo};
 }
 
