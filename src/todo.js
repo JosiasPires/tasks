@@ -8,6 +8,7 @@ class ToDo {
     }
     check() {
         this.isDone = !this.isDone;
+        return this.isDone;
     }
     update(changes) {
         for (let key in changes) {
