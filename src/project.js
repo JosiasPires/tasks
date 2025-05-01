@@ -1,12 +1,12 @@
 function createProject(name) {
     const toDoList = [];
-
-    toDoList.forEach((item, index) => {
-        item.delete = () => {
+    const addToDo = (todo) => {
+        toDoList.push(todo);
+        todo.remove = () => {
+            const index = toDoList.findIndex((item) => todo == item);
             toDoList.splice(index, 1);
         }
-    })
+    } 
     
-    return {name, toDoList};
+    return {name, toDoList, addToDo};
 }
-
