@@ -2,6 +2,15 @@ const projectsContainer = document.querySelector("#projects");
 const main = document.querySelector("main");
 const modal = document.querySelector("#modal");
 const toDoInputs = document.querySelector('.toDoInputs');
+const cancelBtn = document.querySelector("#cancel");
+const submitBtn = document.querySelector("#submit");
+
+cancelBtn.addEventListener('click', () => {
+    modal.classList.toggle('hidden');
+})
+submitBtn.addEventListener('click', () => {
+    modal.classList.toggle('hidden');
+})
 
 const toDoHtml = `<label for="description">Description:</label>
             <textarea name="description" id="description"></textarea>
@@ -63,6 +72,7 @@ function renderToDo(toDo) {
 }
 
 function renderModal(object, formType) {
+    modal.classList.toggle('hidden');
     if ("description" in object) {
         toDoInputs.innerHTML = toDoHtml;
     }
