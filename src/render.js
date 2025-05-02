@@ -71,7 +71,7 @@ function renderToDo(toDo) {
     main.appendChild(container)
 }
 
-function renderModal(object, formType) {
+function renderModal(formType, object={}) {
     modal.classList.toggle('hidden');
     if ("description" in object) {
         toDoInputs.innerHTML = toDoHtml;
