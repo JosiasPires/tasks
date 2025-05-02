@@ -1,4 +1,4 @@
-function createProject(name) {
+function createProject(title) {
     const toDoList = [];
     const addToDo = (todo) => {
         toDoList.push(todo);
@@ -7,7 +7,7 @@ function createProject(name) {
             toDoList.splice(index, 1);
         }
     };
-    return {name, toDoList, addToDo};
+    return {title, toDoList, addToDo};
 }
 
 export {createProject};
