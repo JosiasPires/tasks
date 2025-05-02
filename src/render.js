@@ -1,3 +1,5 @@
+import { changeFormState, changeTarget } from "./index.js";
+
 const projectsContainer = document.querySelector("#projects");
 const main = document.querySelector("main");
 const modal = document.querySelector("#modal");
@@ -26,18 +28,27 @@ const toDoHtml = `<label for="description">Description:</label>
 function renderProject(project) {
     const container = document.createElement('div');
     const title = document.createElement('h3');
+    const editBtn = document.createElement('button');
     const removeBtn = document.createElement('button');
 
     title.textContent = project.title;
-    removeBtn.textContent = 'X'
+    editBtn.textContent = "Edit";
+    removeBtn.textContent = 'X';
+    editBtn.addEventListener('click', () => {
+        changeFormState('edit');
+        changeTarget({title, project});
+        renderModal("edit", project);
+
+    })
     removeBtn.addEventListener('click', (e) => {
         project.remove();
         container.remove();
     })
 
     container.appendChild(title);
+    container.appendChild(editBtn);
     container.appendChild(removeBtn);
-    projectsContainer.appendChild(container)
+    projectsContainer.appendChild(container);
 }
 
 function renderToDo(toDo) {
@@ -77,10 +88,11 @@ function renderModal(formType, object={}) {
         toDoInputs.innerHTML = toDoHtml;
     }
     if (formType == "edit") {
-        for (let prop in object) {
-            modal.elements[prop].value = object[prop];
+        for (let prop of modal.elements) {
+            prop.value = object[prop.name];
         }
     }
+
 }
 
 export {renderProject, renderToDo, renderModal}
