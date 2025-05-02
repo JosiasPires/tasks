@@ -1,5 +1,18 @@
 const projectsContainer = document.querySelector("#projects");
 const main = document.querySelector("main");
+const modal = document.querySelector("#modal");
+const toDoInputs = document.querySelector('.toDoInputs');
+
+const toDoHtml = `<label for="description">Description:</label>
+            <textarea name="description" id="description"></textarea>
+            <label for="dueDate">Due date:</label>
+            <input type="date" name="dueDate" id="dueDate">
+            <label for="priority">Priority:</label>
+            <select name="priority" id="priority">
+                <option value="0" >Low</option>
+                <option value="1" selected="selected">Normal</option>
+                <option value="2">High</option>
+            </select>`
 
 function renderProject(project) {
     const container = document.createElement('div');
@@ -49,4 +62,15 @@ function renderToDo(toDo) {
     main.appendChild(container)
 }
 
-export {renderProject, renderToDo}
+function renderModal(object, formType) {
+    if ("description" in object) {
+        toDoInputs.innerHTML = toDoHtml;
+    }
+    if (formType == "edit") {
+        for (let prop in object) {
+            modal.elements[prop].value = object[prop];
+        }
+    }
+}
+
+export {renderProject, renderToDo, renderModal}
