@@ -1,4 +1,4 @@
-const sidebar = document.querySelector("#sidebar");
+const projectsContainer = document.querySelector("#projects");
 const main = document.querySelector("main");
 
 function renderProject(project) {
@@ -12,10 +12,10 @@ function renderProject(project) {
         project.remove();
         container.remove();
     })
-    
+
     container.appendChild(title);
     container.appendChild(removeBtn);
-    sidebar.appendChild(container)
+    projectsContainer.appendChild(container)
 }
 
 function renderToDo(toDo) {
