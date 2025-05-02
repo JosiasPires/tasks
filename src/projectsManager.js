@@ -6,6 +6,7 @@ function createProjectManager() {
             const index = projectList.findIndex((item) => project == item);
             projectList.splice(index, 1);
         }
+        return project;
     };
     return {projectList, addProject};
 }
