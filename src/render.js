@@ -28,7 +28,7 @@ function renderProject(project) {
     const title = document.createElement('h3');
     const removeBtn = document.createElement('button');
 
-    title.textContent = project.name;
+    title.textContent = project.title;
     removeBtn.textContent = 'X'
     removeBtn.addEventListener('click', (e) => {
         project.remove();
