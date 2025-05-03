@@ -70,6 +70,11 @@ function renderToDo(todo) {
     if (todo.priority == 0) container.style.border='2px solid yellow';
     if (todo.priority == 1) container.style.border='2px solid orange';
     if (todo.priority == 2) container.style.border='2px solid red';
+    if (todo.isDone) {
+        container.style.filter = 'brightness(0.8)';
+        title.style.color = 'gray';
+        title.style.textDecoration = "line-through";
+    }
 
     container.addEventListener('click', () => {
         if (todo.check()) {
