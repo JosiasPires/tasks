@@ -30,12 +30,12 @@ function renderProject(project) {
     const title = document.createElement('h3');
     const editBtn = document.createElement('button');
     const removeBtn = document.createElement('button');
-
+    
     title.textContent = project.title;
     editBtn.textContent = "Edit";
     removeBtn.textContent = 'X';
     container.addEventListener('click', () => {
-        changeCurrentProject(project);
+        changeCurrentProject({container, project});
     })
     editBtn.addEventListener('click', () => {
         changeFormState('edit');
@@ -53,6 +53,7 @@ function renderProject(project) {
     container.appendChild(editBtn);
     container.appendChild(removeBtn);
     projectsContainer.appendChild(container);
+    return container;
 }
 
 function renderToDo(todo) {

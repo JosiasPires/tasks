@@ -71,6 +71,10 @@ header {
     gap: 8px;
 }
 
+.selected {
+    background-color: #73a9ea;
+}
+
 #projects > div {
     padding: 0.5rem;
     border-left: 1px solid black;

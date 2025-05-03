@@ -11,7 +11,7 @@ const addToDoBtn = document.querySelector('#addToDoBtn');
 const modal = document.querySelector('#modal');
 const projectManager = createProjectManager();
 const toDoContainer = document.querySelector("#todos");
-let currentProject = {};
+let currentProject = false;
 let editTarget = {};
 let formTarget = '';
 let formState = 'create';
@@ -23,9 +23,11 @@ export function changeFormTarget(newFormTarget) {
     formTarget = newFormTarget;
 }
 export function changeCurrentProject(newProject) {
+    if (currentProject) currentProject.container.classList.toggle('selected');
+    newProject.container.classList.toggle('selected');
     currentProject = newProject;
     toDoContainer.innerHTML = '';
-    currentProject.toDoList.forEach(todo => {
+    currentProject.project.toDoList.forEach(todo => {
         renderToDo(todo);
     });
 }
@@ -54,13 +56,13 @@ modal.addEventListener("submit", (e) => {
     }
     if (formState == "create") {
         if (formTarget == 'project') {
-            currentProject = projectManager.addProject(createProject( modal.elements["title"].value )) 
-            renderProject(currentProject);
+            currentProject.project = projectManager.addProject(createProject( modal.elements["title"].value ));
+            changeCurrentProject({container: renderProject(currentProject.project), project: currentProject.project});
             toDoContainer.innerHTML = '';
         }
         else {
-            currentProject.addToDo(new ToDo(modal.elements['title'].value, modal.elements['description'].value, date, modal.elements['priority'].value));
-            renderToDo(currentProject.toDoList[currentProject.toDoList.length - 1]);
+            currentProject.project.addToDo(new ToDo(modal.elements['title'].value, modal.elements['description'].value, date, modal.elements['priority'].value));
+            renderToDo(currentProject.project.toDoList[currentProject.project.toDoList.length - 1]);
         }
     }
     if (formState == "edit") {
@@ -77,6 +79,7 @@ modal.addEventListener("submit", (e) => {
     }
 })
 
-currentProject = projectManager.addProject(createProject("Default"));
+const defaultProject = projectManager.addProject(createProject("Default"))
+const defaultContainer = renderProject(projectManager.projectList[0]);
 
-renderProject(projectManager.projectList[0]);
+changeCurrentProject({container: defaultContainer, project: defaultProject});
