@@ -17,6 +17,9 @@ let formState = 'create';
 export function changeFormState(newState) {
     formState = newState;
 }
+export function changeFormTarget(newFormTarget) {
+    formTarget = newFormTarget;
+}
 export function changeCurrentProject(newProject) {
     currentProject = newProject;
     toDoContainer.innerHTML = '';
@@ -55,9 +58,13 @@ modal.addEventListener("submit", (e) => {
     }
     if (formState == "edit") {
         for (let prop of modal.elements) {
-            if (prop.name in editTarget || prop.name in editTarget.project) {
-                editTarget.project[prop.name] = prop.value;
-                editTarget[prop.name].textContent = prop.value;
+            if (prop.tagName != "BUTTON") {
+                console.log(editTarget);
+                console.log(formTarget);
+                console.log(prop);
+                editTarget[formTarget][prop.name] = prop.value;
+                if (prop.name in editTarget) editTarget[prop.name].textContent = prop.value;
+                
             }
         }
     }

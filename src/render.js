@@ -1,4 +1,4 @@
-import { changeFormState, changeEditTarget, changeCurrentProject } from "./index.js";
+import { changeFormState, changeEditTarget, changeCurrentProject, changeFormTarget } from "./index.js";
 
 const projectsContainer = document.querySelector("#projects");
 const toDoContainer = document.querySelector("#todos");
@@ -39,6 +39,7 @@ function renderProject(project) {
     })
     editBtn.addEventListener('click', () => {
         changeFormState('edit');
+        changeFormTarget('project');
         changeEditTarget({title, project});
         renderModal("edit", 'project', project);
 
@@ -54,28 +55,32 @@ function renderProject(project) {
     projectsContainer.appendChild(container);
 }
 
-function renderToDo(toDo) {
+function renderToDo(todo) {
     const container = document.createElement('div');
     const title = document.createElement('h4');
     const editBtn = document.createElement('button');
     const removeBtn = document.createElement('button');
 
-    title.textContent = toDo.title;
+    title.textContent = todo.title;
     editBtn.textContent = "Edit"
     removeBtn.textContent = "X"
     container.style.backgroundColor='red';
 
     container.addEventListener('click', (e) => {
-        if (toDo.check()) container.style.backgroundColor='green';
+        if (todo.check()) container.style.backgroundColor='green';
         else container.style.backgroundColor='red';
-        console.log(toDo.isDone);
+        console.log(todo.isDone);
     })
     editBtn.addEventListener('click', (e) => {
         e.stopPropagation();
+        changeFormState('edit');
+        changeFormTarget('todo');
+        changeEditTarget({title, todo});
+        renderModal("edit", 'todo', todo);
     })
     removeBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        toDo.remove();
+        todo.remove();
         container.remove();
     })
     
