@@ -58,10 +58,12 @@ function renderProject(project) {
 function renderToDo(todo) {
     const container = document.createElement('div');
     const title = document.createElement('h4');
+    const dueDate = document.createElement('p');
     const editBtn = document.createElement('button');
     const removeBtn = document.createElement('button');
 
     title.textContent = todo.title;
+    dueDate.textContent = todo.dueDate;
     editBtn.textContent = "Edit"
     removeBtn.textContent = "X"
     container.style.backgroundColor = 'white';
@@ -83,7 +85,7 @@ function renderToDo(todo) {
         e.stopPropagation();
         changeFormState('edit');
         changeFormTarget('todo');
-        changeEditTarget({title, todo});
+        changeEditTarget({title, dueDate, todo});
         renderModal("edit", 'todo', todo);
     })
     removeBtn.addEventListener('click', (e) => {
@@ -93,6 +95,7 @@ function renderToDo(todo) {
     })
     
     container.appendChild(title);
+    container.appendChild(dueDate);
     container.appendChild(editBtn);
     container.appendChild(removeBtn);
     toDoContainer.appendChild(container)

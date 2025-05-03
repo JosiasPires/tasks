@@ -3,6 +3,8 @@ import { ToDo } from "./todo.js";
 import { createProject } from "./project.js";
 import { createProjectManager } from "./projectsManager.js";
 import { renderModal, renderProject, renderToDo } from "./render.js";
+import { format } from "date-fns";
+
 
 const addProjectBtn = document.querySelector('#addProjectBtn');
 const addToDoBtn = document.querySelector('#addToDoBtn');
@@ -45,6 +47,11 @@ addToDoBtn.addEventListener('click', () => {
 
 modal.addEventListener("submit", (e) => {
     e.preventDefault();
+    let date;
+    if (formTarget == 'todo') {
+        if (!modal.elements['dueDate'].value) date = format(new Date(), "yyyy-MM-dd");
+        else date = format(modal.elements['dueDate'].value, "yyyy-MM-dd");
+    }
     if (formState == "create") {
         if (formTarget == 'project') {
             currentProject = projectManager.addProject(createProject( modal.elements["title"].value )) 
@@ -52,20 +59,19 @@ modal.addEventListener("submit", (e) => {
             toDoContainer.innerHTML = '';
         }
         else {
-            currentProject.addToDo(new ToDo(modal.elements['title'].value, modal.elements['description'].value, modal.elements['dueDate'].value, modal.elements['priority'].value));
+            currentProject.addToDo(new ToDo(modal.elements['title'].value, modal.elements['description'].value, date, modal.elements['priority'].value));
             renderToDo(currentProject.toDoList[currentProject.toDoList.length - 1]);
         }
     }
     if (formState == "edit") {
-        for (let prop of modal.elements) {
-            if (prop.tagName != "BUTTON") {
-                console.log(editTarget);
-                console.log(formTarget);
-                console.log(prop);
-                editTarget[formTarget][prop.name] = prop.value;
-                if (prop.name in editTarget) editTarget[prop.name].textContent = prop.value;
-                
-            }
+        if (formTarget == 'project') {
+            editTarget.title.textContent = editTarget.project.title = modal.elements['title'].value;
+        }
+        else {
+            editTarget.title = editTarget.todo.title = modal.elements['title'].value;
+            editTarget.dueDate.textContent = editTarget.todo.dueDate = date;
+            editTarget.todo.description = modal.elements['description'].value;
+            editTarget.todo.priority = modal.elements['priority'].value;
         }
     }
 })

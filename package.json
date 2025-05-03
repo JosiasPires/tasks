@@ -26,5 +26,8 @@
   "scripts": {
     "build": "webpack",
     "dev": "webpack serve"
+  },
+  "dependencies": {
+    "date-fns": "^4.1.0"
   }
 }
