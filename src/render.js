@@ -64,12 +64,20 @@ function renderToDo(todo) {
     title.textContent = todo.title;
     editBtn.textContent = "Edit"
     removeBtn.textContent = "X"
-    container.style.backgroundColor='red';
+    container.style.backgroundColor = 'white';
+    if (todo.priority == 0) container.style.border='2px solid yellow';
+    if (todo.priority == 1) container.style.border='2px solid orange';
+    if (todo.priority == 2) container.style.border='2px solid red';
 
-    container.addEventListener('click', (e) => {
-        if (todo.check()) container.style.backgroundColor='green';
-        else container.style.backgroundColor='red';
-        console.log(todo.isDone);
+    container.addEventListener('click', () => {
+        if (todo.check()) {
+            container.style.filter = 'brightness(0.8)';
+            title.style.textDecoration = "line-through";
+        }
+        else {
+            container.style.filter = 'brightness(1)';
+            title.style.textDecoration = "none";
+        }
     })
     editBtn.addEventListener('click', (e) => {
         e.stopPropagation();
