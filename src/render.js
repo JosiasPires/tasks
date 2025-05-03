@@ -1,7 +1,7 @@
-import { changeFormState, changeTarget } from "./index.js";
+import { changeFormState, changeEditTarget, changeCurrentProject } from "./index.js";
 
 const projectsContainer = document.querySelector("#projects");
-const main = document.querySelector("main");
+const toDoContainer = document.querySelector("#todos");
 const modal = document.querySelector("#modal");
 const toDoInputs = document.querySelector('.toDoInputs');
 const cancelBtn = document.querySelector("#cancel");
@@ -34,10 +34,13 @@ function renderProject(project) {
     title.textContent = project.title;
     editBtn.textContent = "Edit";
     removeBtn.textContent = 'X';
+    container.addEventListener('click', () => {
+        changeCurrentProject(project);
+    })
     editBtn.addEventListener('click', () => {
         changeFormState('edit');
-        changeTarget({title, project});
-        renderModal("edit", project);
+        changeEditTarget({title, project});
+        renderModal("edit", 'project', project);
 
     })
     removeBtn.addEventListener('click', (e) => {
@@ -79,20 +82,20 @@ function renderToDo(toDo) {
     container.appendChild(title);
     container.appendChild(editBtn);
     container.appendChild(removeBtn);
-    main.appendChild(container)
+    toDoContainer.appendChild(container)
 }
 
-function renderModal(formType, object={}) {
+function renderModal(formType, formTarget, object={}) {
     modal.classList.toggle('hidden');
-    if ("description" in object) {
+    if (formTarget == 'todo') {
         toDoInputs.innerHTML = toDoHtml;
     }
+    else toDoInputs.innerHTML = '';
     if (formType == "edit") {
         for (let prop of modal.elements) {
             prop.value = object[prop.name];
         }
     }
-
 }
 
 export {renderProject, renderToDo, renderModal}
