@@ -15,7 +15,7 @@ body {
     display: grid;
     padding: 1rem;
     height: 100vw;
-    grid-template: 4rem 1fr / 1fr 1fr;
+    grid-template: 4rem 1fr / 1fr 2fr;
     gap: 8px;
 }
 
