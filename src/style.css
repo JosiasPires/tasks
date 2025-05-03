@@ -55,6 +55,9 @@ body, button {
 header {
     grid-row: 1 / 2;
     grid-column: 1 / 2;
+    place-self: center;
+    border-bottom: 1px solid black;
+    padding: 0 8em;
 }
 
 #sidebar {
