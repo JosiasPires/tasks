@@ -74,10 +74,12 @@ function renderToDo(todo) {
     container.addEventListener('click', () => {
         if (todo.check()) {
             container.style.filter = 'brightness(0.8)';
+            title.style.color = 'gray';
             title.style.textDecoration = "line-through";
         }
         else {
             container.style.filter = 'brightness(1)';
+            title.style.color = 'black';
             title.style.textDecoration = "none";
         }
     })
