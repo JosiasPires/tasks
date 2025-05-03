@@ -92,7 +92,7 @@ function renderToDo(todo) {
         e.stopPropagation();
         changeFormState('edit');
         changeFormTarget('todo');
-        changeEditTarget({title, dueDate, todo});
+        changeEditTarget({container, title, dueDate, todo});
         renderModal("edit", 'todo', todo);
     })
     removeBtn.addEventListener('click', (e) => {

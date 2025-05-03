@@ -68,10 +68,11 @@ modal.addEventListener("submit", (e) => {
             editTarget.title.textContent = editTarget.project.title = modal.elements['title'].value;
         }
         else {
-            editTarget.title = editTarget.todo.title = modal.elements['title'].value;
+            editTarget.title.textContent = editTarget.todo.title = modal.elements['title'].value;
             editTarget.dueDate.textContent = editTarget.todo.dueDate = date;
             editTarget.todo.description = modal.elements['description'].value;
             editTarget.todo.priority = modal.elements['priority'].value;
+            editTarget.container.style.borderColor = editTarget.todo.priority == 0 ? 'yellow' : editTarget.todo.priority == 1 ? 'orange' : 'red';
         }
     }
 })
