@@ -9,6 +9,18 @@
     <header>
         <h1>TASKS</h1>
     </header>
+    <form id="modal" class="hidden">
+        <div id="modalElements">
+            <label for="title">Title:</label>
+            <input type="text" name="title" id="title">
+            <div class="toDoInputs">
+            </div>
+            <div class="formButtons">
+                <button type="button" id="cancel">Cancel</button>
+                <button type="submit" id="submit">Submit</button>
+            </div>
+        </div>
+    </form>
     <div id="sidebar">
         <button type="button" id="addProjectBtn">Add Project</button>
         <div id="projects">
@@ -21,16 +33,5 @@
 
         </div>
     </main>
-    <form id="modal" class="hidden">
-        <label for="title">Title:</label>
-        <input type="text" name="title" id="title">
-        <div class="toDoInputs">
-
-        </div>
-        <div class="formButtons">
-            <button type="button" id="cancel">Cancel</button>
-            <button type="submit" id="submit">Submit</button>
-        </div>
-    </form>
 </body>
 </html>

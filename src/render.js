@@ -8,10 +8,10 @@ const cancelBtn = document.querySelector("#cancel");
 const submitBtn = document.querySelector("#submit");
 
 cancelBtn.addEventListener('click', () => {
-    modal.classList.toggle('hidden');
+    modal.className = modal.className == 'hidden' ? 'grid' : 'hidden';
 })
 submitBtn.addEventListener('click', () => {
-    modal.classList.toggle('hidden');
+    modal.className = modal.className == 'hidden' ? 'grid' : 'hidden';
 })
 
 const toDoHtml = `<label for="description">Description:</label>
@@ -104,7 +104,7 @@ function renderToDo(todo) {
 }
 
 function renderModal(formType, formTarget, object={}) {
-    modal.classList.toggle('hidden');
+    modal.className = modal.className == 'hidden' ? 'grid' : 'hidden';
     if (formTarget == 'todo') {
         toDoInputs.innerHTML = toDoHtml;
     }
