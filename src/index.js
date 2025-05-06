@@ -24,6 +24,10 @@ export function changeFormTarget(newFormTarget) {
 }
 export function changeCurrentProject(newProject) {
     if (currentProject) currentProject.container.classList.toggle('selected');
+    if (!newProject) {
+        currentProject = false;
+        return;
+    }
     newProject.container.classList.toggle('selected');
     currentProject = newProject;
     toDoContainer.innerHTML = '';
@@ -45,9 +49,12 @@ addProjectBtn.addEventListener('click', () => {
 })
 
 addToDoBtn.addEventListener('click', () => {
-    formState = "create";
-    formTarget = 'todo';
-    renderModal(formState, formTarget);
+    if (currentProject) {
+        formState = "create";
+        formTarget = 'todo';
+        renderModal(formState, formTarget);
+    }
+    else alert('Select a project first!')
 })
 
 modal.addEventListener("submit", (e) => {
@@ -59,6 +66,7 @@ modal.addEventListener("submit", (e) => {
     }
     if (formState == "create") {
         if (formTarget == 'project') {
+            console.log(currentProject);
             currentProject.project = projectManager.addProject(createProject( modal.elements["title"].value ));
             changeCurrentProject({container: renderProject(currentProject.project), project: currentProject.project});
             toDoContainer.innerHTML = '';
@@ -93,13 +101,16 @@ if (!save || save.length == 0) {
 }
 
 else {
+    let container = {};
     save.forEach(savedProject => {
         const project = projectManager.addProject(createProject(savedProject.title));
-        renderProject(project);
+        container = renderProject(project);
         savedProject.toDoList.forEach(savedToDo => {
             const todo = new ToDo(savedToDo.title, savedToDo.description, savedToDo.dueDate, savedToDo.priority)
             todo.isDone = savedToDo.isDone;
             project.addToDo(todo);
         })
     })
+    changeCurrentProject({container, project: projectManager.projectList[0]});
 }
+

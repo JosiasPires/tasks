@@ -47,6 +47,7 @@ function renderProject(project) {
     removeBtn.addEventListener('click', (e) => {
         project.remove();
         container.remove();
+        changeCurrentProject(false);
         saveState();
     })
 
