@@ -1,4 +1,4 @@
-import { changeFormState, changeEditTarget, changeCurrentProject, changeFormTarget } from "./index.js";
+import { changeFormState, changeEditTarget, changeCurrentProject, changeFormTarget, saveState } from "./index.js";
 
 const projectsContainer = document.querySelector("#projects");
 const toDoContainer = document.querySelector("#todos");
@@ -47,6 +47,7 @@ function renderProject(project) {
     removeBtn.addEventListener('click', (e) => {
         project.remove();
         container.remove();
+        saveState();
     })
 
     container.appendChild(title);
@@ -88,6 +89,7 @@ function renderToDo(todo) {
             title.style.color = 'black';
             title.style.textDecoration = "none";
         }
+        saveState();
     })
     editBtn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -100,6 +102,7 @@ function renderToDo(todo) {
         e.stopPropagation();
         todo.remove();
         container.remove();
+        saveState();
     })
     
     container.appendChild(title);

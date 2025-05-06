@@ -34,6 +34,9 @@ export function changeCurrentProject(newProject) {
 export function changeEditTarget(newTarget) {
     editTarget = newTarget;
 }
+export function saveState() {
+    localStorage.setItem('save', JSON.stringify(projectManager.projectList))
+}
 
 addProjectBtn.addEventListener('click', () => {
     formState = "create";
@@ -77,9 +80,26 @@ modal.addEventListener("submit", (e) => {
             editTarget.container.style.borderColor = editTarget.todo.priority == 0 ? 'yellow' : editTarget.todo.priority == 1 ? 'orange' : 'red';
         }
     }
+    saveState();
 })
 
-const defaultProject = projectManager.addProject(createProject("Default"))
-const defaultContainer = renderProject(projectManager.projectList[0]);
+const save = JSON.parse(localStorage.getItem('save'));
 
-changeCurrentProject({container: defaultContainer, project: defaultProject});
+if (!save || save.length == 0) {
+    const defaultProject = projectManager.addProject(createProject("Default"))
+    const defaultContainer = renderProject(projectManager.projectList[0]);
+    
+    changeCurrentProject({container: defaultContainer, project: defaultProject});
+}
+
+else {
+    save.forEach(savedProject => {
+        const project = projectManager.addProject(createProject(savedProject.title));
+        renderProject(project);
+        savedProject.toDoList.forEach(savedToDo => {
+            const todo = new ToDo(savedToDo.title, savedToDo.description, savedToDo.dueDate, savedToDo.priority)
+            todo.isDone = savedToDo.isDone;
+            project.addToDo(todo);
+        })
+    })
+}
